@@ -1,0 +1,48 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body text-primary">
+        <button class="btn btn-info btn-sm" [routerLink]="['/envio']">Crear</button>
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>sucursalDestino</th>
+                    <th>sucursalOrigen</th>
+                    <th>descripcion</th>
+                    <th>peso</th>
+                    <th>valorEnvio</th>
+                    <th>estadoActual</th>
+                    <th>fecha</th>
+                    <th>cliente</th>
+                    <th>transporte</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let envio of listaEnvios">
+                    <td>{{envio.id}}</td>
+                    <td>{{envio.sucursalDestino}}</td>
+                    <td>{{envio.sucursalOrigen}}</td>
+                    <td>{{envio.descripcion}}</td>
+                    <td>{{envio.peso}}</td>
+                    <td>{{envio.valorEnvio}}</td>
+                    <td>{{envio.estadoActual}}</td>
+                    <td>{{envio.fecha | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{envio.cliente.num_documento}}</td>
+                    <td>{{envio.transporte.tipo_transporte}}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="eliminar(envio)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator [length]="totalRegistros" 
+            [pageSize]="totalPorPagina" 
+            [pageIndex]="paginaActual"
+            [pageSizeOptions]="pageSizeOptions" 
+            (page) = paginar($event) 
+            showFirstLastButtons
+            class="float-left mx-2">
+        </mat-paginator>
+    </div>
+</div>

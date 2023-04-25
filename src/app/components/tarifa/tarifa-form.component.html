@@ -1,0 +1,56 @@
+<div class="container pt-2">
+    <div class="row border border-primary mb-3 ">
+        <div class=" text-center mb-2">
+            <div class="card-header">{{titulo}}</div>
+            <div class="card-body text-primary"></div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-5">
+            <form>
+                <div class="form-group mb-2">
+                    <label for="nombre">Nombre Tarifa</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="tarifa.nombre">
+                    <div class="alert alert-danger" *ngIf="error && error.nombre">{{error.nombre}}</div>
+                </div>
+                <div class="mb-3">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Tope Min</th>
+                                <th>Tome Max</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let caracteristicaT of listaCaracteristicaT; let i = index"
+                                [attr.data-index]="i">
+                                <td>{{caracteristicaT.descripcion}}</td>
+                                <td>{{caracteristicaT.tope_min}}</td>
+                                <td>{{caracteristicaT.tope_max}}</td>
+                                <td>{{caracteristicaT.valor}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"
+                                        (click)="eliminarCaracteristica(i,caracteristicaT)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group mb-2">
+                    <button type="button" class="btn btn-primary" (click)="tarifa.id? modificar(): crear()">
+                        {{tarifa.id? 'Modificar' : 'Crear'}} </button>
+                    <button class="form-group mb-2 btn btn-secondary my-2" routerLink="/tarifa">Regresar</button>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="col-5 pt-3">
+            <app-caracteristica-form (propagar)="cargarCaracteristicas($event)">
+            </app-caracteristica-form>
+        </div>
+
+        <div class="col-1"></div>
+    </div>
+</div>

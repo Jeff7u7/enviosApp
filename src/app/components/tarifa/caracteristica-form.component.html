@@ -1,0 +1,33 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body text-primary">
+        <form>
+            <div class="form-group">
+                <label for="descripcion">Descripcion</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control"
+                    [(ngModel)]="caracteristicaT.descripcion">
+            </div>
+            <div class="form-group">
+                <label for="tope_min">Tope Min</label>
+                <input type="text" name="tope_min" id="tope_min" class="form-control"
+                    [(ngModel)]="caracteristicaT.tope_min">
+            </div>
+            <div class="form-group">
+                <label for="tope_max">Tope Max</label>
+                <input type="text" name="tope_max" id="tope_max" class="form-control"
+                    [(ngModel)]="caracteristicaT.tope_max">
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input type="number" name="valor" id="valor" class="form-control" [(ngModel)]="caracteristicaT.valor">
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="caracteristicaT.id? modificar(): crear()">
+                    {{caracteristicaT.id? 'Modificar' : 'Crear'}} </button>
+                <button class="btn btn-secondary my-2" routerLink="/caracteristica/form">Regresar</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>

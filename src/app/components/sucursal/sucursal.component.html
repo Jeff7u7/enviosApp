@@ -1,0 +1,40 @@
+<div class="container pt-2">
+    <div class="row border border-primary mb-3 ">
+        <div class=" text-center mb-2">
+            <div class="card-header">{{titulo}}</div>
+            <div class="card-body text-primary"></div>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-5">
+
+            <form>
+                <div class="form-group mb-2">
+                    <label for="nombre">nombre</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="sucursal.nombre">
+                    <div class="alert alert-danger" *ngIf="error && error.nombre">{{error.nombre}}</div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="direccion">direccion</label>
+                    <input type="text" name="direccion" id="direccion" class="form-control" [(ngModel)]="sucursal.direccion">
+                    <div class="alert alert-danger" *ngIf="error && error.direccion">{{error.direccion}}</div>
+                </div>
+
+                <div class="form-group" class="mb-3">
+                    <label for="transporte" class="form-label">Region</label>
+                    <select class="form-control" name="selectAction" [(ngModel)]="sucursal.region.id">
+                        <option *ngFor="let region of listaRegiones" [value]="region.id">
+                            {{region.nombre}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-4">
+                    <button type="button" class="btn btn-primary" (click)="crear()">
+                        Crear </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>

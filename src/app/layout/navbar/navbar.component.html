@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/envio" routerLinkActive="active">Envio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/cliente" routerLinkActive="active">Cliente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/region" routerLinkActive="active">Sucursal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/sucursal" routerLinkActive="active">Sucursal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/tarifa" routerLinkActive="active">Tarifa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/historial" routerLinkActive="active">Historial Envios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/historialEnvio" routerLinkActive="active">Historial State</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/rastreo" routerLinkActive="active">Rastrear Pedido</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <li><a *ngIf="!authService.isAuthenticated()" routerLink="/login" class="btn btn-outline-primary">Login</a></li>
+        <li *ngIf="authService.isAuthenticated()">
+          <button (click)="logout()" type="button" class="btn btn-primary">logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,110 @@
+<div class="container pt-2">
+    <div class="row border border-primary mb-3 ">
+        <div class=" text-center mb-2">
+            <div class="card-header">{{titulo}}</div>
+            <div class="card-body text-primary"></div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-5">
+
+            <form>
+                <div class="form-group" class="mb-2">
+                    <label for="sucursalOrigen" class="form-label">Sucursal Origen</label>
+                    <select class="form-control" name="sucursalOrigen" [(ngModel)]="envio.sucursalOrigen">
+                        <option *ngFor="let sucursal of listaSucursales" [value]="sucursal.id">
+                            {{sucursal.nombre}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group" class="mb-2">
+                    <label for="sucursalDestino" class="form-label">Sucursal Destino</label>
+                    <select class="form-control" name="sucursalDestino" [(ngModel)]="envio.sucursalDestino">
+                        <option *ngFor="let sucursalDestino of listaSucursales" [value]="sucursalDestino.id">
+                            {{sucursalDestino.nombre}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group" class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="descripcion"
+                        [(ngModel)]="envio.descripcion">
+                    <div class="alert alert-danger" *ngIf="error && error.descripcion">{{error.descripcion}}</div>
+                </div>
+                <div class="form-group" class="mb-3">
+                    <label for="cliente" class="form-label">Número de Documento</label>
+                    <input type="number" name="cliente" class="form-control" id="cliente"
+                        [(ngModel)]="envio.cliente.num_documento">
+                    <div class="alert alert-danger" *ngIf="error && error.cliente">{{error.cliente}}</div>
+                </div>
+                <div class="form-group" class="mb-3">
+                    <label for="transporte" class="form-label">Transporte</label>
+                    <select class="form-control" name="selectAction" [(ngModel)]="envio.transporte.id">
+                        <option *ngFor="let transporte of listaTransportes" [value]="transporte.id">
+                            {{transporte.tipo_transporte}}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Peso</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let producto of listaproductos; let i = index" [attr.data-index]="i">
+                                <td>{{producto.nombre}}</td>
+                                <td>{{producto.peso}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm"
+                                        (click)="eliminarProducto(i,producto)">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group" class="mb-2">
+                    <label for="tarifas" class="form-label">Seleccione Tarifa</label>
+                    <select class="form-control" name="valorTarifa" [(ngModel)]="tarifa.id">
+                        <option *ngFor="let tarifa of listaTarifas" [value]="tarifa.id">
+                            {{tarifa.nombre}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group" class="mb-2">
+                    <button class="btn btn-primary" *ngIf="authService.hasRoles('ROLE_SUCURSAL')" (click)="calcularCostoEnvio()"> Calcular costo Envio</button>
+                    <button class="btn btn-secondary" *ngIf="authService.hasRoles('ROLE_SUCURSAL')" (click)="crear()"> Crear Envio</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-5 pt-3">
+            <app-producto-form (propagar)="cargarProductos($event)">
+            </app-producto-form>
+
+            <div *ngIf="valorCobrar" class="row mb-3">
+                <div class=" text-center mb-2">
+                    <div class="card-header">Valor a pagar</div>
+                    <div class="card-body text-primary"></div>
+                    <div>
+                        <div class="alert alert-primary" role="alert">{{valorCobrar}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="idEnvio" class="row mb-3">
+                <div class=" text-center mb-2">
+                    <div class="card-header">Id de seguimiento Envio</div>
+                    <div class="card-body text-primary"></div>
+                    <div>
+                        <div class="alert alert-primary" role="alert">{{idEnvio}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
